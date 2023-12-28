@@ -1,5 +1,4 @@
 import { toast } from "sonner"
-import { LoaderIcon } from "lucide-react"
 import { useForm } from "react-hook-form"
 import { useId, useTransition } from "react"
 import { Share1Icon, Link1Icon, LinkBreak1Icon } from "@radix-ui/react-icons"
