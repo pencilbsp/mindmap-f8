@@ -1,15 +1,8 @@
 "use client"
-import { RegisterLink, LoginLink } from "@kinde-oss/kinde-auth-nextjs/components"
-
+import Link from "next/link"
 import { Button } from "./ui/button"
-import {
-  Sheet,
-  SheetTitle,
-  SheetHeader,
-  SheetContent,
-  SheetTrigger,
-  SheetDescription,
-} from "@/components/ui/sheet"
+import { Sheet, SheetTitle, SheetHeader, SheetContent, SheetTrigger, SheetDescription } from "@/components/ui/sheet"
+import { PATHS } from "@/configs"
 
 export default function MobileMenu({ user }) {
   return (
@@ -32,10 +25,10 @@ export default function MobileMenu({ user }) {
         {!user && (
           <div className="flex gap-3">
             <Button className="flex-1" asChild variant="outline">
-              <LoginLink>Đăng nhập</LoginLink>
+              <Link href={PATHS.auth.login}>Đăng nhập</Link>
             </Button>
             <Button className="flex-1" asChild>
-              <RegisterLink>Đăng ký</RegisterLink>
+              <Link href={PATHS.auth.register}>Đăng ký</Link>
             </Button>
           </div>
         )}
