@@ -28,6 +28,7 @@ export default function DeleteButton({ id }) {
           size="icon"
           onClick={onClick}
           variant="outline"
+          disabled={pending}
           isLoading={pending}
           icon={<TrashIcon className="w-4 h-4" />}
         />

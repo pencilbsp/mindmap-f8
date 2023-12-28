@@ -1,6 +1,7 @@
 import Link from "next/link"
 import { redirect } from "next/navigation"
 import { getServerSession } from "next-auth"
+import { PlusIcon } from "@radix-ui/react-icons"
 
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table"
 
@@ -8,6 +9,7 @@ import { PATHS } from "@/configs"
 import prisma from "@/lib/prisma"
 import { authOptions } from "@/lib/auth"
 import DeleteButton from "./DeleteButton"
+import { Button } from "@/components/ui/button"
 import { formatDate, formatToNow } from "@/lib/format-date"
 
 export const metadata = {
@@ -30,6 +32,15 @@ export default async function MyMindmaps() {
 
   return (
     <div className="container">
+      <div className="flex w-full justify-end my-3">
+        <Button asChild variant="outline">
+          <Link href={PATHS.mindmap}>
+            Tạo mới
+            <PlusIcon className="ml-2" />
+          </Link>
+        </Button>
+      </div>
+
       <Table>
         <TableHeader>
           <TableRow>

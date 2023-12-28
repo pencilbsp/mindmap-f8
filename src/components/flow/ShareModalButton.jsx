@@ -14,18 +14,17 @@ import {
   DialogDescription,
 } from "@/components/ui/dialog"
 import { copy } from "@/lib/clipboard"
+import LoadingButton from "../LoadingButton"
 import { Label } from "@/components/ui/label"
 import { Button } from "@/components/ui/button"
 import { shareMindmap } from "@/actions/mindmap"
 import RHFSwitch from "@/components/hook-form/RHFSwitch"
 import FormProvider from "@/components/hook-form/FormProvider"
-import useMindmap from "@/hooks/useMindmap"
 
 export default function ShareModalButton({ mindmapId }) {
   const formId = useId()
   const [pending, startTransition] = useTransition()
-  const { allowEdit, isPublic } = useMindmap()
-  const methods = useForm({ defaultValues: { isPublic, allowEdit } })
+  const methods = useForm({ defaultValues: { isPublic: false, allowEdit: false } })
 
   const { watch, handleSubmit } = methods
 
@@ -67,8 +66,15 @@ export default function ShareModalButton({ mindmapId }) {
             </div>
           </div>
           <DialogFooter>
-            <Button from={formId} disabled={pending} onClick={handleSubmit(onSubmit)}>
-              {isStopShare ? "Ngừng chia sẻ" : "Sao chép liên kết"}
+            <LoadingButton
+              disabled={pending}
+              isLoading={pending}
+              loadingText="Vui lòng chờ..."
+              onClick={handleSubmit(onSubmit)}
+              text={isStopShare ? "Ngừng chia sẻ" : "Sao chép liên kết"}
+              icon={isStopShare ? <LinkBreak1Icon className="ml-2" /> : <Link1Icon className="ml-2" />}
+            />
+            {/* <Button from={formId}>
               {pending ? (
                 <LoaderIcon className="animate-spin" />
               ) : isStopShare ? (
@@ -76,7 +82,7 @@ export default function ShareModalButton({ mindmapId }) {
               ) : (
                 <Link1Icon className="ml-2" />
               )}
-            </Button>
+            </Button> */}
           </DialogFooter>
         </FormProvider>
       </DialogContent>
